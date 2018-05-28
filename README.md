@@ -6,9 +6,11 @@ The package phiDelta embodies source code that implements phidelta measures and 
 In ether form, phidelta measures and diagrams can be used to perform classifier and / or feature assessment, with the following inherent semantics:
 
 Classifier performance
+
 Given a run on a test set, the pair <phi,delta> measures bias and accuracy of the classifier at hand. In this case, the four corners of a diagram are related to the concepts of oracle (top), anti-oracle (bottom), and dummy classifiers (left and right). To start making experiments with classifier assessment, you should come up with one or more <phi,delta> pairs. For instance, you may run 30-fold cross-validation and for each run store information about specificity and sensitivity. To convert your <spec,sens> pairs into <phi,delta> pairs you can use the function model.phidelta_std (in the event inputs are in fact arrays, the conversion is made with a single call). To visualize a diagram you should use the class "View" --several examples of how to use it are given (e.g., in experiments_get.py).
 
 Feature importance
+
 Beyond the evaluation / visualization of classifier performance, also statistics for identifying "class signatures" are provided. These statistics measure the importance of each feature in terms of phi and delta. In particular, given a run on a test set, for each feature, the pair <phi,delta> measures to what extent it is characteristic / rare (phi), and to what extent it is covariant / contravariant with the positive class (delta). In this case, the four corners of a diagram are related to the concepts of highest-covariance (top), highest contravariance (bottom), rare feature (left) and characteristic feature (right). To start making experiments with feature importance (i.e., on class signatures), the file "experiments_get.py" can be run. It run as it is, although you may want to change the list of datasets and/or ratio values.
 
 The current version of phidelta measures allows to deal with binary and floating point features (the code for dealing with nominal features, although in alpha version, is also included).
