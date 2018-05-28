@@ -44,7 +44,9 @@ For the object oriented version see, in particular: model.phidelta_std, model.ph
 The procedural version has been provided for compatibility with the corresponding implementation made for the R language by prof. D. Heider and dr. U. Neumann (Phillips University, Marburg, Germany). Its most relevant functions are:
 
 funmodel.convert(spec,sens,ratio=1.)
+
 funmodel.stats(data,labels,info=None,verbose=False)
+
 funmodel.plot(phi,delta,ratio=1.,names=None,title='')
 
 This software is in beta-release and runs under Python 3.
