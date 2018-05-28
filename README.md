@@ -26,10 +26,15 @@ The parameters phi and delta are supposed to be the outcome of an experiment (no
 Please note that, before saving, you should supply phi and delta as "single parameter" using zip. Conversely, if you want to get phi and delta after loading a previously saved file, you should unzip the result (see also the function unzip2 in utils.py). An example of how to use save_csv_data and load_csv_data follows:
 
 from utils import load_csv_data, save_csv_data, unzip2
+
 ... # Here you should generate phi and delta as outcome of some experiment(s)
+
 save_csv_data(zip(phi,delta),'test-2018-05-30.dat',path='../datasets/')
+
 ... # More code here
+
 phi, delta = unzip2(load_csv_data('test-2018-05-30.dat',path='../datasets/')
+
 ... # Now you can reuse phi and delta ...
 
 Not least of all, the package comes in two versions: object-oriented and procedural.
