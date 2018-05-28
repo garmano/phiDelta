@@ -29,11 +29,11 @@ from utils import load_csv_data, save_csv_data, unzip2
 
 ... # Here you should generate phi and delta as outcome of some experiment(s)
 
-save_csv_data(zip(phi,delta),'test-2018-05-30.dat',path='../datasets/')
+save_csv_data(zip(phi,delta),'test-2018-05-30.dat',path='../testoutcomes/')
 
 ... # More code here
 
-phi, delta = unzip2(load_csv_data('test-2018-05-30.dat',path='../datasets/')
+phi, delta = unzip2(load_csv_data('test-2018-05-30.dat',path='../testoutcomes/')
 
 ... # Now you can reuse phi and delta ...
 
