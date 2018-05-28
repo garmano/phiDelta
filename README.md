@@ -17,7 +17,7 @@ The current version of phidelta measures allows to deal with binary and floating
 
 Note that some datasets are also provided for testing the software. They are all taken from the UCI ML repository. The interested reader should connect to the UCI web site for additional information on each dataset.
 
-Please note that you are supposed to set up a datasets folder (do not forget to properly set the "path" parameter --see source code-- which should be set accordingly). In the dataset folder you will also find a file called "datasets.info". That file is useful to simplify experiments, as relevant information for each dataset is supplied therein.
+Please note also that you are supposed to set up a datasets folder (do not forget to properly set the "path" parameter --see source code-- which should be set accordingly). In the dataset folder you will also find a file called "datasets.info". That file is useful to simplify experiments, as relevant information for each dataset is supplied therein.
 
 As for visualization, the simplest way of showing a phidelta diagram consist of creating an instance of the class "View". Relevant parameters for the constructor are: phi, delta, names, and ratio. Default values apply to names (i.e., None) and ratio (i.e., 1).
 
