@@ -21,9 +21,9 @@ Please note also that you are supposed to set up a datasets folder (do not forge
 
 As for visualization, the simplest way of showing a phidelta diagram consist of creating an instance of the class "View". Relevant parameters for the constructor are: phi, delta, names, and ratio. Default values apply to names (i.e., None) and ratio (i.e., 1).
 
-The parameters phi and delta are supposed to be the outcome of an experiment (no matter whether they refer to classifier assessment or feature importance). If needed, you may also save them in csv format for future visualizations using the functions save and load (see utils.py).
+The parameters phi and delta are supposed to be the outcome of an experiment (no matter whether they refer to classifier assessment or feature importance). If needed, you may also save them in csv format for future visualizations using the functions save_csv_data and load_csv_data (see utils.py).
 
-Please note that, before saving, you should supply phi and delta as "single parameter" using zip. Conversely, if you want to get phi and delta after loading a previously saved file, you should unzip the result (see also the function unzip2 in utils.py). An example of how to use load and save follows:
+Please note that, before saving, you should supply phi and delta as "single parameter" using zip. Conversely, if you want to get phi and delta after loading a previously saved file, you should unzip the result (see also the function unzip2 in utils.py). An example of how to use save_csv_data and load_csv_data follows:
 
 from utils import load_csv_data, save_csv_data, unzip2
 ... # Here you should generate phi and delta as outcome of some experiment(s)
