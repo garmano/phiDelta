@@ -1,33 +1,46 @@
 # phiDelta
-Python implementation of phi-delta diagrams
+*** Python implementation of phi-delta diagrams ***
 
-The package phiDelta embodies source code that implements phidelta measures and diagrams. These measures and diagrams come in two forms: standard and generalized. The former is intended to measure instrinsic (i.e., unbiased) properties, whereas the latter actual (i.e., biased) properties.
+The package phiDelta embodies source code that implements phidelta measures and diagrams. These measures and diagrams come in two forms: standard and generalized. The former is intended to measure instrinsic (i.e., unbiased) properties of classifiers / features, whereas the latter actual (i.e., biased) properties.
 
-In ether form, phidelta measures and diagrams can be used to perform classifier and / or feature assessment, with a slightly different semantics.
+In ether form, phidelta measures and diagrams can be used to perform classifier and / or feature assessment, with the following inherent semantics:
 
--- Classifier performance. Given a run on a test set, the pair <phi,delta> measures bias and accuracy of the classifier at hand. In this case, the four corners of a diagram are related to the concepts of oracle (top), anti-oracle (bottom), dummy classifiers (left and right).
+Classifier performance
+Given a run on a test set, the pair <phi,delta> measures bias and accuracy of the classifier at hand. In this case, the four corners of a diagram are related to the concepts of oracle (top), anti-oracle (bottom), and dummy classifiers (left and right). To start making experiments with classifier assessment, you should come up with one or more <phi,delta> pairs. For instance, you may run 30-fold cross-validation and for each run store information about specificity and sensitivity. To convert your <spec,sens> pairs into <phi,delta> pairs you can use the function model.phidelta_std (in the event inputs are in fact arrays, the conversion is made with a single call). To visualize a diagram you should use the class "View" --several examples of how to use it are given (e.g., in experiments_get.py).
 
--- Feature importance. Given a run on a test set, the pair <phi,delta> measures to what extent the feature at hand is characteristic / rare (phi), and to what extent it is covariant / contravariant with the positive class (delta). In this case, the four corners of a diagram are related to the concepts of hightst-covariance (top), highest contravariance (bottom), rare feature (left) and characteristic feature (right).
+Feature importance
+Beyond the evaluation / visualization of classifier performance, also statistics for identifying "class signatures" are provided. These statistics measure the importance of each feature in terms of phi and delta. In particular, given a run on a test set, for each feature, the pair <phi,delta> measures to what extent it is characteristic / rare (phi), and to what extent it is covariant / contravariant with the positive class (delta). In this case, the four corners of a diagram are related to the concepts of highest-covariance (top), highest contravariance (bottom), rare feature (left) and characteristic feature (right). To start making experiments with feature importance (i.e., on class signatures), the file "experiments_get.py" can be run. It run as it is, although you may want to change the list of datasets and/or ratio values.
 
-Beyond the evaluation / visualization of classifier performance, also statistics for identifying "class signatures" are provided. These statistics measure the importance of each feature in terms of phi and delta.
+The current version of phidelta measures allows to deal with binary and floating point features (the code for dealing with nominal features, although in alpha version, is also included).
 
-The current version of phidelta measures allows to deal with binary and floating point features (although in alpha version, the code for dealing with nominal features is also included).
+Note that some datasets are also provided for testing the software. They are all taken from the UCI ML repository. The interested reader should connect to the UCI web site for additional information on each dataset.
 
-Some datasets are also provided for testing the software (see the datasets folder). They are all taken from the UCI ML repository. The interested reader should connect to the UCI web site for additional information on each dataset.
+Please note that you are supposed to set up a datasets folder (do not forget to properly set the "path" parameter --see source code-- which should be set accordingly). In the dataset folder you will also find a file called "datasets.info". That file is useful to simplify experiments, as relevant information for each dataset is supplied therein.
 
-Please note that, in the datasets folder, you will find a file called "datasets.info". That file is useful to simplify experiments, as all relevant information of each dataset is supplied therein.
+As for visualization, the simplest way of showing a phidelta diagram consist of creating an instance of the class "View". Relevant parameters for the constructor are: phi, delta, names, and ratio. Default values apply to names (i.e., None) and ratio (i.e., 1).
 
-To start making experiments with statistics (i.e., on class signatures), the file "experiments_get.py" can be run.
+The parameters phi and delta are supposed to be the outcome of an experiment (no matter whether they refer to classifier assessment or feature importance). If needed, you may also save them in csv format for future visualizations using the functions save and load (see utils.py).
 
-The simplest way of showing a phidelta diagram consist of creating an instance of the class "View". Relevant parameters for the constructor are: phi, delta, names, and ratio. Default values apply to names (i.e., None) and ratio (i.e., 1).
+Please note that, before saving, you should supply phi and delta as "single parameter" using zip. Conversely, if you want to get phi and delta after loading a previously saved file, you should unzip the result (see also the function unzip2 in utils.py). An example of how to use load and save follows:
 
-The parameters phi and delta are supposed to be the outcome of an experiment (these data can refer to classifier assessment or feature importance). If needed, you may also load and save them in csv format for future visualizations using the functions load and save in the file utils.py. Please note that, before saving, you should supply phi and delta as "single parameter" using zip. Conversely, if you want to get phi and delta after loading a previously saved file, you should unzip the result (see also the function unzip2 in utils.py).  
+from utils import load_csv_data, save_csv_data, unzip2
+... # Here you should generate phi and delta as outcome of some experiment(s)
+save_csv_data(zip(phi,delta),'test-2018-05-30.dat',path='../datasets/')
+... # More code here
+phi, delta = unzip2(load_csv_data('test-2018-05-30.dat',path='../datasets/')
+... # Now you can reuse phi and delta ...
 
-Before running the slider, please make sure that two lists or two vectors (called phi and delta) are available. These data can be manually generated or downloaded from a test file. See the main of Slider2D.py for more information.
+Not least of all, the package comes in two versions: object-oriented and procedural.
 
-Any test file should be in csv format (you may choose the separator, however). At present, each line of the file must contain a couple of phidelta values or a couple of specificity and sensitivity values. The function load, provided in the main of Slider2D, can load both kinds of data (see also the function ss2phidelta, which takes care of data conversion). A test file containing 100 randomly generated samples is also available (see test.csv).
+For the object oriented version see, in particular: model.phidelta_std, model.phidelta_std2gen, view.View, and statistics.Statistics.
 
-This software is in alpha-release and runs under Python 2.7.
+The procedural version has been provided for compatibility with the corresponding implementation made for the R language by prof. D. Heider and dr. U. Neumann (Phillips University, Marburg, Germany). Its most relevant functions are:
+
+funmodel.convert(spec,sens,ratio=1.)
+funmodel.stats(data,labels,info=None,verbose=False)
+funmodel.plot(phi,delta,ratio=1.,names=None,title='')
+
+This software is in beta-release and runs under Python 3.
 
 For any further information please feel free to contact me.
 
