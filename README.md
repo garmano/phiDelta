@@ -9,19 +9,19 @@ In ether form, phidelta measures and diagrams can be used to perform classifier 
 
 -- Feature importance. Given a run on a test set, the pair <phi,delta> measures to what extent the feature at hand is characteristic / rare (phi), and to what extent it is covariant / contravariant with the positive class (delta). In this case, the four corners of a diagram are related to the concepts of hightst-covariance (top), highest contravariance (bottom), rare feature (left) and characteristic feature (right).
 
-Beyond the visualization of classifier performance, also statistics for identifying "class signatures" are provided. These statistics measure the importance of each feature in terms of phi and delta.
+Beyond the evaluation / visualization of classifier performance, also statistics for identifying "class signatures" are provided. These statistics measure the importance of each feature in terms of phi and delta.
 
-The current version of phidelta measures and diagrams allows to deal with binary and floating point features (although in alpha version, the code for dealing with nominal features is also included).
+The current version of phidelta measures allows to deal with binary and floating point features (although in alpha version, the code for dealing with nominal features is also included).
 
 Some datasets are also provided for testing the software (see the datasets folder). They are all taken from the UCI ML repository. The interested reader should connect to the UCI web site for additional information on each dataset.
 
-Please note that, in the datasets folder, you will find a file called "datasets.info". That file is useful to simplify experiments, as all useful information is supplied therein.
+Please note that, in the datasets folder, you will find a file called "datasets.info". That file is useful to simplify experiments, as all relevant information of each dataset is supplied therein.
 
 To start making experiments with statistics (i.e., on class signatures), the file "experiments_get.py" can be run.
 
-The simplest way of showing a phidelta diagram consist of creating an instance of the class "View". Relevant parameters for the constructor are: phi, delta, names, and ratio. Default values apply to names (i.e., None) and ratio (i.e.,1).
+The simplest way of showing a phidelta diagram consist of creating an instance of the class "View". Relevant parameters for the constructor are: phi, delta, names, and ratio. Default values apply to names (i.e., None) and ratio (i.e., 1).
 
-Phi and delta are supposed to the outcome of an experiment (these data can refer to classifier assessment or feature importance). Please note that 
+The parameters phi and delta are supposed to be the outcome of an experiment (these data can refer to classifier assessment or feature importance). If needed, you may also load and save them in csv format for future visualizations using the functions load and save in the file utils.py. Please note that, before saving, you should supply phi and delta as "single parameter" using zip. Conversely, if you want to get phi and delta after loading a previously saved file, you should unzip the result (see also the function unzip2 in utils.py).  
 
 Before running the slider, please make sure that two lists or two vectors (called phi and delta) are available. These data can be manually generated or downloaded from a test file. See the main of Slider2D.py for more information.
 
