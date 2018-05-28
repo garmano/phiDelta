@@ -1,11 +1,13 @@
 # phiDelta
 Python implementation of phi-delta diagrams
 
-The package phiDelta embodies source code that implements phidelta measures and diagrams. These measures can be used to perform classifier and / or feature assessment.
+The package phiDelta embodies source code that implements phidelta measures and diagrams. These measures and diagrams come in two forms: standard and generalized. The former is intended to measure instrinsic (i.e., unbiased) properties, whereas the latter actual (i.e., biased) properties.
 
-In the former case, given a run on a test set, the pair <phi,delta> measures bias and accuracy of the classifier at hand.
+In ether form, phidelta measures and diagrams can be used to perform classifier and / or feature assessment, with a slightly different semantics.
 
-In the latter case, given a run on a test set, the pair <phi,delta> measures to what extent the feature at hand is characteristic / rare, and to what extent it is covariant / contravariant with the positive class.
+-- Classifier performance. Given a run on a test set, the pair <phi,delta> measures bias and accuracy of the classifier at hand. In this case, the four corners of a diagram are related to the concepts of oracle (top), anti-oracle (bottom), dummy classifiers (left and right).
+
+-- Feature importance. Given a run on a test set, the pair <phi,delta> measures to what extent the feature at hand is characteristic / rare (phi), and to what extent it is covariant / contravariant with the positive class (delta). In this case, the four corners of a diagram are related to the concepts of hightst-covariance (top), highest contravariance (bottom), rare feature (left) and characteristic feature (right).
 
 Beyond the visualization of classifier performance, also statistics for identifying "class signatures" are provided. These statistics measure the importance of each feature in terms of phi and delta.
 
