@@ -90,6 +90,7 @@ def conditional_eval(string,stype=str):
     if string[0] == "'": return eval(string)
     if string[0] == '"': return eval(string)
   if stype in (tuple,list): return eval(string)
+  if stype == bool: return string == 'True'
   return stype(string)
 
 # -----------------------------------------------------------------------------
