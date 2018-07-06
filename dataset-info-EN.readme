@@ -1,0 +1,78 @@
+*** User manual for dataset handling (see file dataset.info) ***
+
+The description of a dataset follows:
+
+@dataset <dataset-name>
+  header   = <true-or-false>
+  filename = <filename>
+  classes  = <pos-classes>, <neg-classes>
+  index    = <index-number>
+  sep      = <separator>
+  ext      = <file-extension>
+  exclude  = <exclude-attrs>
+
+Not all fields must be specified. In particular, the following defaults hold:
+
+- default(header)      = True
+- default(filename)    = dataset name, followed by ".csv"
+- default(pos-classes) = the first class identified in the dataset (alphabetic order)
+- default(neg-classes) = the remaining classes
+- default(index)       = -1 (which referes to the last column in the dataset)
+- default(sep)         = ','
+- default(ext)         = '.csv'
+- default(exclude)     = tuple()
+
+PS Both <pos-classes> and <neg-classes> can be simple items or tuples or lists. Non relevant attributes can be neglected by simply listing out the corresponding column indexes (as tuples o lists, or as single elements in the event of a single column to be excluded).
+
+*** An example ***
+
+@dataset 'iris'
+  header   = True
+  index    = -1
+  classes  = 'Iris-setosa', ('Iris-versicolor', 'Iris-virginica')
+  
+Making defaults explicit, the above definition becomes:
+  
+@dataset 'iris'
+  header   = True
+  filename = 'arrhythmia.csv'
+  classes  = 'Iris-setosa', ('Iris-versicolor', 'Iris-virginica')
+  index    = -1
+  sep      = ','
+  ext      = 'csv'
+  exclude  = tuple()
+  
+*** Another example ***
+
+@dataset 'arrhythmia'
+  header   = False
+  exclude  = 10, 11, 12, 13, 14
+  
+As there are 16 classes, numbered from 1 to 16, adding the defaults gives:
+  
+@dataset 'arrhythmia'
+  header   = False
+  filename = 'arrhythmia.csv'
+  classes  = '1', ('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16')
+  index    = -1
+  ext      = 'csv'
+  sep      = ','
+  exclude  = 10, 11, 12, 13, 14
+  
+*** TODO LIST ***
+
+To make "classes" easier to use, the possibility of defining only positive classes (or only negative classes), will be introduced soon. In fact, in the example above, it would be better to (be able to) write: classes  = '1',  with the meaning that the positive class is '1', whereas the others should be considered as negative. Moreover, for numeric classes, it will be soon remove the need of specifying them within quotes ...
+
+*** FURTHER INFORMATIONS ***
+
+At the moment, some defaults can be controlled by modifying the ciontent of the following dictionary (see file datainfo.py):
+
+  __defaults__ = { 'name': (str,''), 'description': (str,''),
+                   'sep': (str,','), 'index': (int,-1), 'header': (bool,True), 
+                   'filename': (str,''), 'ext': (str,'csv'),
+                   'classes': (tuple,('1','0')), 'fnames': (list,[]),
+                   'exclude': (tuple,None)}
+                   
+The remanining defaults are hard coded ...
+
+
